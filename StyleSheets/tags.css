@@ -1,0 +1,21 @@
+.tag {
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: default;
+}
+
+.tutorial {
+    background-color: #19ff00;
+    border: 1px solid #C0C0C0;
+}
+
+.review {
+    background-color: #fc4c00;
+    border: 1px solid #C0C0C0;
+}
+
+.misc {
+    background-color: #5656ff;
+    border: 1px solid #C0C0C0;
+}

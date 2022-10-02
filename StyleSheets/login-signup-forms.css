@@ -1,0 +1,46 @@
+.login-signup-form {
+    width: 60%;
+    margin: 5rem auto auto;
+    padding: 2rem;
+    border: 2px solid rgba(0, 0, 0, 0.22);
+    border-radius: 5px;
+    box-shadow: 0 0 10px 0 rgb(61, 61, 61, 0.5);
+}
+
+.login-signup-form .form-title {
+    text-align: center;
+}
+
+.login-signup-form .form-group{
+    width: 50%;
+    margin: 1rem auto;
+}
+
+.login-signup-form .form-footer{
+    width: 70%;
+    margin: 1rem auto;
+    text-align: center;
+}
+
+.login-signup-form .form-footer .btn{
+   margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+@media screen and (min-width: 700px) {
+    .login-signup-form {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .login-signup-form {
+        width: 40%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .login-signup-form {
+        width: 30%;
+    }
+}

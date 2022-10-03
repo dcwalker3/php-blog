@@ -66,6 +66,11 @@
                     case '/logout':
                         session_destroy();
                         header('Location: /');
+                        break;
+                    case '/post-viewer?id=' . $_GET['id']:
+                        # Get parameters from URL
+                        require_once('Components/Post-Viewer/Post-Viewer.php');
+                        break;
                     default:
                         require_once('404.php');
                 }

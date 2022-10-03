@@ -35,6 +35,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 # Add the user to the session
                 $_SESSION['username'] = $username;
                 $_SESSION['email'] = $email;
+                $_SESSION['id'] = $dbConnection->query("SELECT id FROM users WHERE username = '$username'")->fetch_assoc()['id'];
+
 
 
                 header('Location: /');

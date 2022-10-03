@@ -10,19 +10,18 @@
         $title = $_POST['postTitle'];
         $content = $_POST['postContent'];
         $type = $_POST['postType'];
-        $author = $_SESSION['username'];
 
         if($title != '' && $content != '' && $type != ''){
             $acceptedTypes = ['tutorial', 'review', 'misc'];
 
-            # Make sure post type is a accepted type
+            # Make sure post type is an accepted type
             if(in_array($type, $acceptedTypes)){
                 $title = mysqli_real_escape_string($dbConnection, $title);
                 $content = mysqli_real_escape_string($dbConnection, $content);
                 $type = mysqli_real_escape_string($dbConnection, $type);
-                $author = mysqli_real_escape_string($dbConnection, $author);
 
-                $sql = "INSERT INTO posts (title, body, type, author) VALUES ('$title', '$content', '$type', '$author')";
+
+                $sql = "INSERT INTO posts (title, body, type, user_id) VALUES ('$title', '$content', '$type', '$_SESSION[id]')";
 
                 if ($dbConnection->query($sql) === TRUE) {
                     $msg = 'Post created successfully';
@@ -88,7 +87,7 @@
             </script>
             <textarea id="postContent" name="postContent"></textarea>
         </div>
-        <input type="submit" class="btn btn-success" value="Submit"></input>
+        <input type="submit" class="btn btn-success" value="Submit">
 
     </form>
 </div>

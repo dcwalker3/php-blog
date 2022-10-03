@@ -5,7 +5,11 @@
 
     $username = $_SESSION['username'];
     $posts = [];
-    $sql = "SELECT * FROM posts";
+    $sql = "SELECT posts.id as postID, posts.user_id, posts.title, posts.body, posts.type, posts.likes, posts.dislikes, posts.created_at as post_created, users.username, users.id as userID
+            FROM posts
+            INNER JOIN users ON posts.user_id = users.id
+            WHERE users.id = posts.user_id
+            ORDER BY posts.created_at DESC";
     $result = $dbConnection->query($sql);
 
     if(mysqli_num_rows($result) > 0){
@@ -69,25 +73,27 @@
             <?php
                 foreach($posts as $post){
                     $body = $post['body'];
+
                     # Shorten the body if it is too long. Replace the last 3 characters with '...'
                     if(strlen($body) > 250){
                         $body = substr($body, 0, 250) . '...';
                     }
 
-                    $humanReadableDate = date('F j, Y', strtotime($post['created_at']));
+                    $humanReadableDate = date('F j, Y', strtotime($post['post_created']));
                     $capitalizedType = ucfirst($post['type']);
-                    echo "<div class='post'>
+                    echo "<a href='http://blogSite/post-viewer?id={$post["postID"]}' class='post-link' style='color: black'>
+                        <div class='post'>
                             <h3 class='post-title'>{$post['title']}</h3>
                             <p class='post-content'>{$body}</p>
-                            <p class='post-author'>Created By: {$post["author"]}</p>
+                            <p class='post-author'>Created By: {$post["username"]}</p>
                             <sub class='post-upload-date'>Uploaded: {$humanReadableDate}</sub>
                             <span class='tag {$post["type"]}'>{$capitalizedType}</span>
                             <div class='post-footer'>
                                 <form action='' method='post'>
                                     <div class='like-btn'>
-                                        <input type='hidden' name='post_id' value='{$post['id']}'>
+                                        <input type='hidden' name='post_id' value='{$post['postID']}'>
                                         <input type='hidden' name='current-likes' value='{$post['likes']}'>
-                                        <input type='hidden' name='user_id' value='{$_SESSION['id']}'>
+                                        <input type='hidden' name='user_id' value='{$post["user_id"]}'>
                                         <button type='submit' name='like' value='Like'>
                                             <i class='fas fa-thumbs-up'></i>
                                         </button>
@@ -96,7 +102,7 @@
                                 </form>
                                 <form action='' method='post'>
                                     <div class='dislike-btn'>
-                                        <input type='hidden' name='post_id' value='{$post['id']}'>
+                                        <input type='hidden' name='post_id' value='{$post['postID']}'>
                                         <input type='hidden' name='current-dislikes' value='{$post['dislikes']}'>
                                         <input type='hidden' name='user_id' value='{$_SESSION['id']}'>
                                         <button type='submit' name='dislike' value='Dislike'>
@@ -106,7 +112,7 @@
                                     </div>
                                 </form>                                
                             </div>
-                        </div>";
+                        </div></a>";
                 }
             ?>
         </div>

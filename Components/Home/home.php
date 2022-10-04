@@ -81,7 +81,7 @@
 
                     $humanReadableDate = date('F j, Y', strtotime($post['post_created']));
                     $capitalizedType = ucfirst($post['type']);
-                    echo "<a href='http://blogSite/post-viewer?id={$post["postID"]}' class='post-link' style='color: black'>
+                    echo "<a href='http://blogSite/post-viewer?id={$post["postID"]}' class='post-link' style='color: black; text-decoration: none'>
                         <div class='post'>
                             <h3 class='post-title'>{$post['title']}</h3>
                             <p class='post-content'>{$body}</p>

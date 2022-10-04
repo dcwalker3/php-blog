@@ -93,7 +93,10 @@
     opacity: 50%;
 }
 
-
+.post-link {
+    color: #000 !important;
+    text-decoration: none !important;
+}
 
 @media screen and (max-width: 1600px) {
     .post-container {

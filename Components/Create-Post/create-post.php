@@ -24,7 +24,8 @@
                 $sql = "INSERT INTO posts (title, body, type, user_id) VALUES ('$title', '$content', '$type', '$_SESSION[id]')";
 
                 if ($dbConnection->query($sql) === TRUE) {
-                    $msg = 'Post created successfully';
+                    ob_clean();
+                    header('Location: /');
                 } else {
                     $err = 'Error creating post';
                 }

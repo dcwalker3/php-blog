@@ -19,6 +19,12 @@
 
         $commentResult = $dbConnection->query($sql);
 
+        $interactionSQL = "SELECT * FROM interactions WHERE post_id = '$postID' AND user_id = '$userID'";
+        $interactionResult = $dbConnection->query($interactionSQL);
+        $interaction = mysqli_fetch_assoc($interactionResult);
+        $interaction['interaction_type'] = $interaction['interaction_type'] ?? null;
+
+
         $sql = "SELECT posts.id as postID, posts.user_id, posts.title, posts.body, posts.type, posts.likes, posts.dislikes, posts.created_at as post_created, users.username, users.id as userID
                 FROM posts
                 INNER JOIN users ON posts.user_id = users.id
@@ -27,7 +33,6 @@
         $postResult = $dbConnection->query($sql);
         if(mysqli_num_rows($postResult) > 0){
             $post = mysqli_fetch_assoc($postResult);
-            $comments = mysqli_fetch_assoc($commentResult);
 
             $humanReadableDate = date('F j, Y', strtotime($post['post_created']));
             $capitalizedType = ucfirst($post['type']);
@@ -45,7 +50,8 @@
                                     <input type='hidden' name='post_id' value='{$post['postID']}'>
                                     <input type='hidden' name='current-likes' value='{$post['likes']}'>
                                     <input type='hidden' name='user_id' value='{$post["user_id"]}'>
-                                    <button type='submit' name='like' value='Like'>
+                                    <button type='submit' name='like' value='like'
+                                    class=". ($interaction['interaction_type'] == 'like' ? 'liked' : '') .">
                                         <i class='fas fa-thumbs-up'></i>
                                     </button>
                                     <span class='like-count'>{$post['likes']}</span>
@@ -56,7 +62,8 @@
                                     <input type='hidden' name='post_id' value='{$post['postID']}'>
                                     <input type='hidden' name='current-dislikes' value='{$post['dislikes']}'>
                                     <input type='hidden' name='user_id' value='{$_SESSION['id']}'>
-                                    <button type='submit' name='dislike' value='Dislike'>
+                                    <button type='submit' name='dislike' value='lislike' 
+                                        class=". ($interaction['interaction_type'] == 'dislike' ? 'disliked' : '') .">
                                         <i class='fas fa-thumbs-down'></i>
                                     </button>
                                     <span class='dislike-count'>{$post['dislikes']}</span>
@@ -64,7 +71,7 @@
                             </form>                                
                         </div>
                     </div>
-                    <div class='comments-container'>
+                    <div class='comments-container' id='commentsContainer'>
                         <h3 class='comments-title'>Comments</h3>
                         <div class='comments'>
                             <form action='' method='post'>
@@ -111,7 +118,7 @@
             require_once 'utils/addComment.php';
 
             $results = addComment($postID, $userID, $commentBody);
-            if ($results != true) {
+            if (!$results) {
                 echo "
                     <div class='alert alert-danger' style='
                         text-align: center;
@@ -119,9 +126,46 @@
                         padding: 1.5rem;
                         margin: auto;
                     '>
-                        {$results}
+                        Error Uploading Comment. Please Try Again.
                     </div>
                 ";
+            } else {
+                echo "<script>window.location.href = 'post-viewer?id={$postID}';</script>";
+            }
+        } elseif(isset($_POST["like"])){
+            # Check if user has already liked the post
+            $sql = "SELECT * FROM interactions WHERE user_id = '{$_SESSION['id']}' AND post_id = '{$_POST['post_id']}'";
+            $result = $dbConnection->query($sql);
+            if(mysqli_num_rows($result) > 0){
+                $result = mysqli_fetch_assoc($result);
+                if($result["interaction_type"] == "dislike"){
+                    $sql = "UPDATE interactions SET interaction_type = 'like' WHERE user_id = '{$_SESSION['id']}' AND post_id = '{$_POST['post_id']}'";
+                    $dbConnection->query($sql);
+                    $sql = "UPDATE posts SET likes = likes + 1, dislikes = dislikes - 1 WHERE id = '{$_POST['post_id']}'";
+                    $dbConnection->query($sql);
+                    echo "<script>window.location.href = 'post-viewer?id={$_POST['post_id']}';</script>";
+                }
+            } else {
+                $sql = "INSERT INTO interactions (user_id, post_id, interaction_type) VALUES ('{$_SESSION['id']}', '{$_POST['post_id']}', 'like')";
+                $dbConnection->query($sql);
+                $sql = "UPDATE posts SET likes = likes + 1 WHERE id = '{$_POST['post_id']}'";
+                $dbConnection->query($sql);
+                echo "<script>window.location.href = 'post-viewer?id={$_POST['post_id']}';</script>";
+            }
+
+        } elseif(isset($_POST["dislike"])){
+            # Check if user has already liked the post
+            $sql = "SELECT * FROM interactions WHERE user_id = '{$_SESSION['id']}' AND post_id = '{$_POST['post_id']}'";
+            $result = $dbConnection->query($sql);
+            if(mysqli_num_rows($result) > 0){
+                $result = mysqli_fetch_assoc($result);
+                if($result["interaction_type"] == "like"){
+                    $sql = "UPDATE interactions SET interaction_type = 'dislike' WHERE user_id = '{$_SESSION['id']}' AND post_id = '{$_POST['post_id']}'";
+                    $dbConnection->query($sql);
+                    $sql = "UPDATE posts SET likes = likes-1, dislikes = dislikes+1 WHERE id = '{$_POST['post_id']}'";
+                    $dbConnection->query($sql);
+                    echo "<script>window.location.href = 'post-viewer?id={$_POST['post_id']}';</script>";
+                }
             }
         }
     }

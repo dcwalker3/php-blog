@@ -39,16 +39,14 @@
 .post-body {
     width: 80%;
     margin: auto;
-    word-break: break-all;
 }
 
 /* Select all tags in .post-body */
 .post-body * {
     margin-left: auto;
     left: 50%;
-    width: 100%;
-    color: red !important;
     text-indent: 20px;
+    word-break: break-all;
 }
 
 .post-container .post-author {
@@ -98,6 +96,16 @@
     text-decoration: none !important;
 }
 
+.liked {
+    background-color: #1c6ca1 !important;
+    color: white !important;
+}
+
+.disliked {
+    background-color: #ea2b2b !important;
+    color: white !important;
+}
+
 @media screen and (max-width: 1600px) {
     .post-container {
         width: 90%;
@@ -119,8 +127,7 @@
     .post-container {
         width: 90%;
     }
-
-    .post-container .post-body * {
+    .post-body * {
         width: 100%;
         word-break: break-all;
     }

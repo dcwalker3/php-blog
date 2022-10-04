@@ -84,7 +84,7 @@
                     echo "<a href='http://blogSite/post-viewer?id={$post["postID"]}' class='post-link' style='color: black; text-decoration: none'>
                         <div class='post'>
                             <h3 class='post-title'>{$post['title']}</h3>
-                            <p class='post-content'>{$body}</p>
+                            <div class='post-body'>{$body}</div>
                             <p class='post-author'>Created By: {$post["username"]}</p>
                             <sub class='post-upload-date'>Uploaded: {$humanReadableDate}</sub>
                             <span class='tag {$post["type"]}'>{$capitalizedType}</span>

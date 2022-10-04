@@ -48,7 +48,7 @@
 <form class="login-signup-form" action="" method="post" >
     <h1 class="form-title">Login</h1>
     <div class="form-group">
-        <label for="emailUserNameInput">Enter Email or Username</label>
+        <label for="emailUserNameInput">Email</label>
         <input type="email" class="form-control" id="emailUserNameInput" name="emailUsername" required>
     </div>
     <div class="form-group">

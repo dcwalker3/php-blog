@@ -1,0 +1,30 @@
+.admin-login-signup-form {
+    width: 40%;
+    margin: 5rem auto auto;
+    padding: 2rem;
+    border: 2px solid rgba(0, 0, 0, 0.22);
+    border-radius: 5px;
+    box-shadow: 0 0 10px 0 rgb(61, 61, 61, 0.5);
+}
+
+.admin-login-signup-form .admin-form-title {
+    text-align: center;
+}
+
+.admin-login-signup-form .admin-submit-form-btn-container {
+    width: 70%;
+    margin: 1rem auto;
+    text-align: center;
+}
+
+.admin-login-signup-form .admin-submit-form-btn {
+    margin-top: 1rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
+}
+
+.admin-login-signup-form-footer {
+    width: 70%;
+    margin: 2rem auto;
+    text-align: center;
+}

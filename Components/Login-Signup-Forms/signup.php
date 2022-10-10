@@ -8,16 +8,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $dbConnection = $db->getConnection();
 
     $email = $_POST['email'];
-    $username = $_POST['username'];
+    $firstName = $_POST['firstName'];
+    $lastName = $_POST['lastName'];
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirmPassword'];
 
     if($password == $confirmPassword) {
         $email = mysqli_real_escape_string($dbConnection, $email);
-        $username = mysqli_real_escape_string($dbConnection, $username);
         $password = mysqli_real_escape_string($dbConnection, $password);
+        $firstName = mysqli_real_escape_string($dbConnection, $firstName);
+        $lastName = mysqli_real_escape_string($dbConnection, $lastName);
 
-        $sql = "SELECT * FROM users WHERE username = '$username' OR email = '$email'";
+        $sql = "SELECT * FROM users WHERE email = '$email'";
 
         $result = $dbConnection->query($sql);
 
@@ -27,15 +29,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         } else {
             $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-            $sql = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$hashedPassword')";
+            $sql = "INSERT INTO users (first_name, last_name, email, password, role) VALUES ('$firstName', '$lastName', '$email','$hashedPassword', 'subscriber')";
 
             if ($dbConnection->query($sql) === TRUE) {
                 $msg = 'Account created successfully';
 
                 # Add the user to the session
-                $_SESSION['username'] = $username;
+
                 $_SESSION['email'] = $email;
-                $_SESSION['id'] = $dbConnection->query("SELECT id FROM users WHERE username = '$username'")->fetch_assoc()['id'];
+                $_SESSION['firstName'] = $firstName;
+                $_SESSION['lastName'] = $lastName;
+                $_SESSION['role'] = 'subscriber';
+                $_SESSION['id'] = $dbConnection->query("SELECT id FROM users WHERE email = '$email'")->fetch_assoc()['id'];
 
 
 
@@ -56,9 +61,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <label for="emailInput">Email</label>
         <input type="email" class="form-control" id="emailInput" name="email" required>
     </div>
-    <div class="form-group">
-        <label for="usernameInput">Username</label>
-        <input type="text" class="form-control" id="usernameInput" name="username" required>
+    <div class="row">
+        <div class="col">
+            <input type="text" class="form-control" placeholder="First name" name="first_name">
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Last name" name="last_name">
+        </div>
     </div>
     <div class="form-group">
         <label for="passwordInput">Password</label>

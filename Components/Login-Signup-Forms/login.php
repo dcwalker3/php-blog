@@ -7,13 +7,13 @@
         $db = new connection();
         $dbConnection = $db->getConnection();
 
-        $username = $_POST['emailUsername'];
+        $email = $_POST['email'];
         $password = $_POST['password'];
 
-        $username = mysqli_real_escape_string($dbConnection, $username);
+        $username = mysqli_real_escape_string($dbConnection, $email);
         $password = mysqli_real_escape_string($dbConnection, $password);
 
-        $sql = "SELECT * FROM users WHERE username = '$username' OR email = '$username'";
+        $sql = "SELECT * FROM users WHERE email = '$email'";
 
         $result = $dbConnection->query($sql);
 
@@ -26,9 +26,11 @@
             # If the password is correct
             if(password_verify($password, $hashedPassword)){
 
-                $_SESSION['username'] = $row['username'];
                 $_SESSION['email'] = $row['email'];
+                $_SESSION['first_name'] = $row['first_name'];
+                $_SESSION['last_name'] = $row['last_name'];
                 $_SESSION['id'] = $row['id'];
+                $_SESSION['role'] = $row['role'];
 
                 // Clean the output buffer to prevent any errors from being displayed
                 // when the user is redirected.
@@ -36,11 +38,11 @@
                 header('Location: /');
             }
             else{
-                ;$err = 'Incorrect username/email or password';
+                ;$err = 'Incorrect email or password';
             }
         }
         else{
-            ;$err = 'Incorrect username/email or password';
+            ;$err = 'Incorrect email or password';
         }
 
     }
@@ -48,8 +50,8 @@
 <form class="login-signup-form" action="" method="post" >
     <h1 class="form-title">Login</h1>
     <div class="form-group">
-        <label for="emailUserNameInput">Email</label>
-        <input type="email" class="form-control" id="emailUserNameInput" name="emailUsername" required>
+        <label for="emailInput">Email</label>
+        <input type="email" class="form-control" id="emailInput" name="email" required>
     </div>
     <div class="form-group">
         <label for="passwordInput">Password</label>

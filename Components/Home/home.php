@@ -17,13 +17,7 @@
         }
     }
 ?>
-<div class="home">
-    <div class="article-search">
-        <form action="search.php" method="GET">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
-            <button class="btn btn-primary" type="submit" value="search">Search</button>
-        </form>
-    </div>
+<div class="home dark-mode">
     <div class="most-recent">
         <div class="articles">
             <?php
@@ -31,16 +25,24 @@
                     $mostRecent = $articles[0];
                     echo "
                         <div class='article'>
-                            <div class='article-image'>
-                                <img src='uploads/$mostRecent[image]' alt=''>
+                        ";
+
+                    // If the article has a thumbnail, display it
+                    if(isset($mostRecent['image'])) {
+                        echo "
+                            <div class='article-image' >
+                                <img src = 'uploads/$mostRecent[image]' alt = '' >
+                            </div >";
+                    }
+
+                        echo "
+                                <div class='article-content'>
+                                    <h2>$mostRecent[title]</h2>
+                                    <div >$mostRecent[body]</div>
+                                    <a href='article-viewer?id=$mostRecent[id]' class='btn btn-primary'>Read More</a>
+                                </div>
                             </div>
-                            <div class='article-content'>
-                                <h2>$mostRecent[title]</h2>
-                                <div >$mostRecent[content]</div>
-                                <a href='article.php?id=$mostRecent[id]'>Read More</a>
-                            </div>
-                        </div>
-                    ";
+                            ";
                 }
             ?>
         </div>

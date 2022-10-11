@@ -29,20 +29,6 @@
         <link rel="stylesheet" href="/StyleSheets/posts.css">
         <link rel="stylesheet" href="/StyleSheets/dashboard.css">
         <link rel="stylesheet" href="/StyleSheets/tags.css">
-
-        <!-- TinyMCE -->
-        <script src="../tinymce/js/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
-        <script>
-
-        tinymce.init(
-            {
-                selector: '#TextEditor',
-                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect',
-                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-                showMenuBar: true
-            }
-        );
-    </script>
     </head>
     <body>
         <?php
@@ -76,7 +62,9 @@
                 case '/logout' :
                     require 'utils/logout.php';
                     break;
-
+                case '/article-viewer?id=' . ($_GET['id'] ?? '') :
+                    require 'Components/Article-Viewer/Article-Viewer.php';
+                    break;
                 default:
                     http_response_code(404);
                     require __DIR__ . '/404.php';

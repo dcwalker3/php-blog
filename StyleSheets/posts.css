@@ -1,109 +1,62 @@
-.post {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 10px 0 rgb(61, 61, 61, 0.5);
-    margin: 2rem auto;
-    padding: 2rem 2rem 3rem;
+.dark-mode {
+    background-color: rgba(0, 0, 0, 0.851);
+    color: #fff;
 }
 
-.post .post-title {
+.blog-article {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.blog-article .blog-article-date {
+    font-size: 0.9rem;
+    opacity: 0.5;
+    margin: 0;
+    padding: 0;
+}
+
+.blog-article .blog-article-title {
     text-align: center;
-    font-weight: bold;
+    margin-bottom: .75rem;
 }
 
-.post .post-author {
-    margin: 1rem auto;
-    text-align: right;
-    font-size: 1.1rem;
+.blog-article .blog-article-content {
+    margin-top: 4rem;
 }
 
-.post .post-upload-date {
-    margin: 1rem auto;
-    text-align: right;
-    float: right;
-    font-size: 1.1rem;
-}
-
-.post .post-footer form {
-    margin-right: 1rem;
-    margin-top: 1.5rem;
-    display: inline-flex;
-}
-
-.post-container {
-    width: 80%;
-    margin: 0 auto;
-}
-
-.post-body {
-    width: 80%;
-    margin: auto;
-}
-
-/* Select all tags in .post-body */
-.post-body * {
-    margin-left: auto;
-    left: 50%;
+.blog-article-content p {
     text-indent: 20px;
-    word-break: break-all;
-}
-
-.post-container .post-author {
-    color: red !important;
-}
-
-.post-container .comments-container {
-    margin: auto;
-    width: 100%;
-}
-
-.post-container .comments form {
-    width: 100%;
-    height: 1rem;
-}
-
-.post-container .comments-container form input {
-    width: 80%;
-    height: 2rem;
-    margin-bottom: 10rem;
+    font-size: 1.5rem;
 }
 
 
-.comments-list {
-    margin-top: 10rem;
-    width: 100%;
-    padding: 2rem;
-    margin-bottom: 2rem;
+.blog-article-comment-section {
+    margin-top: 4rem;
 }
 
-.comment {
-    width: 80%;
-    margin-top: 1rem;
+.blog-article-comment-section h2 {
     margin-bottom: 1rem;
-    padding: 2rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 15px 0 rgb(0, 0, 0);
+    text-align: center;
 }
 
-.comment .comment-footer {
-    opacity: 50%;
+.blog-article-comment-section .blog-article-comment {
+    margin-top: 2rem;
 }
 
-.post-link {
-    color: #000 !important;
-    text-decoration: none !important;
+.blog-article-comment-section .blog-article-comment-author {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-right: .75rem;
+    margin-bottom: .75rem;
 }
 
-.liked {
-    background-color: #1c6ca1 !important;
-    color: white !important;
-}
-
-.disliked {
-    background-color: #ea2b2b !important;
-    color: white !important;
+.blog-article-comment-section .blog-article-comment-date {
+    font-size: 80%;
+    opacity: 0.5;
+    margin: 0;
+    padding: 0;
 }
 
 @media screen and (max-width: 1600px) {

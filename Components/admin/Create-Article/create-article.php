@@ -20,12 +20,15 @@
                     $extensions_arr = array("jpg", "jpeg", "png", "gif"); // Valid Extensions
                     if(in_array($imageFileType, $extensions_arr)){
                         // Set our category
+                        // If the user has selected a category from the dropdown, use that
+                        // else use the custom category
                         if(isset($_POST['category'])) {
                             $category = $_POST['category'];
                         } else {
                             $category = $_POST['custom-category'];
                         }
 
+                        // Set our variables
                         $title = $_POST['title'];
                         $userID = $_SESSION['user'];
                         $content = $_POST['content'];

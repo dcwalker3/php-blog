@@ -44,6 +44,9 @@
                 case '/admin':
                     require 'Components/admin/admin-dashboard/index.php';
                     break;
+                case '/admin/upload-image':
+                    require 'Components/admin/upload-image/upload-image.php';
+                    break;
                 case '/admin/login':
                     require 'Components/admin/admin-login/login.php';
                     break;

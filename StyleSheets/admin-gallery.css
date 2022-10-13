@@ -1,0 +1,11 @@
+.admin-gallery {
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 2rem;
+}
+
+.admin-gallery .admin-gallery-image {
+    display: inline-flex;
+}

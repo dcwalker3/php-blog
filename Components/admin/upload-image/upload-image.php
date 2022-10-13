@@ -17,7 +17,7 @@
                     // Store image in the /SRC/uploads/images/thumbnails folder
                     // Get the image itself
                     $file = $_FILES["image"];
-                    $targetPath = $_SERVER["DOCUMENT_ROOT"] . "/SRC/uploads/images/gallery/";
+                    $targetPath =  "SRC/uploads/images/gallery/";
 
                     // Get timestamp so we can append to the image name
                     $timestamp = time();
@@ -59,11 +59,15 @@
 
             // Echo out the form to upload an image
             echo '
-                <form action="" method="POST" enctype="multipart/form-data">
-                    <input type="file" name="image" id="image" accept="image/*" required><br>
-                    <input type="text" name="altText" id="altText" placeholder="Descriptive Text" required><br>
-                    <button type="submit" class="btn btn-success">Upload</button>
-                </form>
+                <div class="form-group image-upload-form">
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        <input type="file" class="form-control" name="image" id="image" accept="image/*" required><br>
+                        <input type="text" name="altText" id="altText" placeholder="Descriptive Text" required><br>
+                        <div class="form-footer-container">
+                            <button type="submit" class="btn btn-success">Upload</button>
+                        </div>
+                    </form>
+                </div>
             ';
         }
     }

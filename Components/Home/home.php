@@ -17,7 +17,7 @@
         }
     }
 ?>
-<div class="home dark-mode">
+<div class="home">
     <div class="most-recent">
         <div class="articles">
             <?php
@@ -38,7 +38,7 @@
                         echo "
                                 <div class='article-content'>
                                     <h2>$mostRecent[title]</h2>
-                                    <div >$mostRecent[body]</div>
+                                    <div >$mostRecent[content]</div>
                                     <a href='article-viewer?id=$mostRecent[id]' class='btn btn-primary'>Read More</a>
                                 </div>
                             </div>

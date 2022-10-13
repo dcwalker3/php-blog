@@ -5,6 +5,8 @@
     border: 2px solid rgba(0, 0, 0, 0.22);
     border-radius: 5px;
     box-shadow: 0 0 10px 0 rgb(61, 61, 61, 0.5);
+    background-color: #fff;
+    color: #000;
 }
 
 .admin-login-signup-form .admin-form-title {
@@ -17,10 +19,11 @@
     text-align: center;
 }
 
+
+
 .admin-login-signup-form .admin-submit-form-btn {
     margin-top: 1rem;
-    padding-left: 5rem;
-    padding-right: 5rem;
+    width: 8rem;
 }
 
 .admin-login-signup-form-footer {

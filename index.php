@@ -23,17 +23,21 @@
         <script src="https://kit.fontawesome.com/8d3d444b91.js" crossorigin="anonymous"></script>
 
         <!-- Custom CSS -->
+        <link rel="stylesheet" href="/StyleSheets/styles.css">
         <link rel="stylesheet" href="/StyleSheets/login-signup-forms.css">
         <link rel="stylesheet" href="/StyleSheets/admin-login-signup-forms.css">
         <link rel="stylesheet" href="/StyleSheets/admin-create-article.css">
         <link rel="stylesheet" href="/StyleSheets/posts.css">
-        <link rel="stylesheet" href="/StyleSheets/dashboard.css">
         <link rel="stylesheet" href="/StyleSheets/tags.css">
+        <link rel="stylesheet" href="/StyleSheets/image-upload.css">
+        <link rel="stylesheet" href="/StyleSheets/admin-gallery.css">
     </head>
-    <body>
+    <body class="dark-mode">
         <?php
-            # Navbar up top
             require_once('Components/Navbar/navbar.php');
+        ?>
+        <div class="content-area dark-mode">
+        <?php
 
             $request = $_SERVER['REQUEST_URI'];
 
@@ -46,6 +50,9 @@
                     break;
                 case '/admin/upload-image':
                     require 'Components/admin/upload-image/upload-image.php';
+                    break;
+                case '/admin/gallery':
+                    require 'Components/admin/admin-gallery/gallery.php';
                     break;
                 case '/admin/login':
                     require 'Components/admin/admin-login/login.php';
@@ -74,5 +81,6 @@
                     break;
             }
         ?>
+        </div>
     </body>
 </html>

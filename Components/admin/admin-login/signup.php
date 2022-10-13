@@ -75,7 +75,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" placeholder="Confirm Password" required>
         </div>
         <div class="admin-submit-form-btn-container">
-            <button type="submit" class="btn btn-success admin-submit-form-btn">Login</button>
+            <button type="submit" class="btn btn-success admin-submit-form-btn">Signup</button>
         </div>
         <div class="admin-login-signup-form-footer">
             <p>Already have an account? <a href="/admin/login">Login</a></p>
